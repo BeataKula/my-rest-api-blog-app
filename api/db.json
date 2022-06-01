@@ -1,0 +1,27 @@
+{
+  "streams": [
+    {
+      "title": "I create This Stream - stream edit",
+      "description": "This was made by me!",
+      "userId": "106890743082741394225",
+      "id": 1
+    },
+    {
+      "title": "weq",
+      "description": "qwewqe",
+      "id": 2
+    },
+    {
+      "title": "stream 3",
+      "description": "stream description 3",
+      "userId": "106890743082741394228",
+      "id": 3
+    },
+    {
+      "title": "I create This Stream - stream edit  4",
+      "description": "This was made by me! 4",
+      "userId": "106890743082741394225",
+      "id": 4
+    }
+  ]
+}
