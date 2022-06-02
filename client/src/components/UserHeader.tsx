@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { PostState, UserByIdResponce, UserHeaderType } from "../AppTypes";
+import { PostState, UserByIdResponse, UserHeaderType } from "../AppTypes";
 
 //TODO add type
 //class UserHeader extends React.Component<UserHeaderType> {
@@ -27,7 +27,7 @@ const mapStateToProps = (
     props: {
         userId: number;
         user: {
-            userById: UserByIdResponce;
+            userById: UserByIdResponse;
         };
     }
 ) => {
@@ -35,7 +35,7 @@ const mapStateToProps = (
     let postsReducer = state.postsReducer;
     let usersReducer = state.usersReducer;
 
-    function checkId(user: { userById: UserByIdResponce }) {
+    function checkId(user: { userById: UserByIdResponse }) {
         if (user.userById.data.id === props.userId) {
             return user;
         }

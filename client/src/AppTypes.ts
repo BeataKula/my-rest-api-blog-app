@@ -83,7 +83,7 @@ export type UserAction = {
     payload: UserPayload;
 };
 
-export type UserByIdResponce  = {
+export type UserByIdResponse  = {
     isLoading: boolean,
     error: boolean,
     data: User;
@@ -94,7 +94,7 @@ export interface UserHeaderType {
     postsReducer: PostState;
     usersReducer: [];
     user: {
-        userById: UserByIdResponce
+        userById: UserByIdResponse
     };
     userId: number;
 }
