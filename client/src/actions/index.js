@@ -1,11 +1,27 @@
 import {
+    SIGN_IN,
+    SIGN_OUT,
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
+    GET_USERS_BY_ID_SUCCESS,
 } from "./actionsTypes";
 
 import _ from "lodash";
-import { getPosts, getUserById } from "../apis/jsonPlaceholder";
+import { getPosts, getUserById } from "../apis/jsonLocalApi";
+
+export const SignIn = (userId) => {
+    return {
+        type: SIGN_IN,
+        payload: userId,
+    };
+};
+
+export const SignOut = () => {
+    return {
+        type: SIGN_OUT,
+    };
+};
 
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(fetchPosts());
@@ -73,5 +89,5 @@ export const fetchPosts = () => async (dispatch) => {
 export const fetchUser = (id) => async (dispatch) => {
     const response = await getUserById(id);
 
-    dispatch({ type: "GET_USERS_BY_ID_SUCCESS", payload: response.data });
+    dispatch({ type: GET_USERS_BY_ID_SUCCESS, payload: response.data });
 };

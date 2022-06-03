@@ -9,10 +9,14 @@ import PostList from "./pages/PostList";
 import LeftPanel from "./pages/LeftPanel";
 import NoPage from "./pages/NoPage";
 
+import GoogleAuth from "./components/GoogleAuth";
+
 class App extends Component<{}, {}> {
     render() {
         return (
             <>
+                {" "}
+                <GoogleAuth />
                 <header>
                     <Title>Blog Beaty 1</Title>
                 </header>
