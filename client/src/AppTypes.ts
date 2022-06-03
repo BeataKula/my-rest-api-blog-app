@@ -90,10 +90,9 @@ export type UserByIdResponse  = {
 }
 
 export interface UserHeaderType {
-    dispatch?: DispatchUserType;
     postsReducer: PostState;
-    usersReducer: [];
-    user: {
+    usersReducer: { userById: UserByIdResponse }[];
+    user?: {
         userById: UserByIdResponse
     };
     userId: number;
