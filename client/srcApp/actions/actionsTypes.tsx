@@ -1,6 +1,0 @@
-//TODO tmp
-export const FETCH_POSTS = "FETCH_POSTS";
-
-export const GET_POSTS_REQUEST = "GET_POSTS_REQUEST";
-export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS";
-export const GET_POSTS_FAIL = "GET_POSTS_FAIL";
