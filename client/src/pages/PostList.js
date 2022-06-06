@@ -1,10 +1,15 @@
 import React from "react";
+import history from "../history";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { fetchPostsAndUsers } from "../actions";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Button from "../components/Button";
+import { StyledButtonLink } from "../components/LinkComponent";
+
+const ADD_COMMENT_LINK = "/Comment/add";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -16,6 +21,25 @@ export const PostsListStyle = styled.ul`
     grid-gap: 10px;
 `;
 
+const PostElementStyle = styled.section`
+    margin: 10px;
+    padding: 0px;
+    border: #dcedc8 solid 1px;
+    background-color: #f1f8e9;
+`;
+
+const PostElementFooterStyle = styled.section`
+    display: block;
+    margin: 0px;
+    background-color: #f5f5f5;
+    border-top: #dcedc8 solid 1px;
+    min-height: 10vh;
+`;
+
+const AddComment = () => {
+    history.push(ADD_COMMENT_LINK);
+    history.go(ADD_COMMENT_LINK);
+};
 class PostList extends React.Component {
     state = {
         posts: [],
@@ -28,6 +52,8 @@ class PostList extends React.Component {
 
     componentDidUpdate() {
         const allList = this.props.postsReducer.allList;
+        const auth = this.props.auth;
+
         if (
             !allList.error &&
             !allList.isLoading &&
@@ -69,7 +95,22 @@ class PostList extends React.Component {
         }
 
         const ListOfPosts = this.state.posts.map((post) => {
-            return <Post key={post["id"]} {...post} />;
+            const buttonId = "button-" + post["id"].toString();
+            return (
+                <li key={post["id"]}>
+                    <PostElementStyle>
+                        <Post {...post} />
+                        <PostElementFooterStyle>
+                            <Button
+                                id={buttonId}
+                                about="commentPrimary"
+                                name="Dodaj komentarz"
+                                onClick={AddComment}
+                            />
+                        </PostElementFooterStyle>
+                    </PostElementStyle>
+                </li>
+            );
         });
 
         return (
@@ -78,10 +119,26 @@ class PostList extends React.Component {
             </>
         );
     }
+    renderCreate = () => {
+        console.log("renderCreate");
+        //if (this.props.auth.isSignedIn) {
+        return (
+            <StyledButtonLink
+                className="ui top attached button  right floated olive basic "
+                to="blog/id/1/comment/new"
+            >
+                Add post
+            </StyledButtonLink>
+        );
+        // }
+    };
 
     render() {
         return (
             <>
+                <div className="ui relaxed divided list">
+                    {this.renderCreate()}
+                </div>
                 <Loader isActive={!this.state.isloaded} />
                 <div className="ui relaxed divided list">
                     {this.renderMessage()}
@@ -93,9 +150,11 @@ class PostList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    //console.log(state);
     return {
         postsReducer: state.postsReducer,
         usersReducer: state.usersReducer,
+        auth: state.auth,
     };
 };
 

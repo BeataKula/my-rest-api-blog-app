@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import StyledLink from "../components/LinkComponent";
+import { StyledLink, StyledHighlightedLink } from "../components/LinkComponent";
 
 export const LeftPanelStyle = styled.div`
     text-align: left;
@@ -42,6 +42,14 @@ const LeftPanel = () => {
                         <StyledLink to="/Contact" className="menu-link">
                             Contact
                         </StyledLink>
+                    </li>
+                    <li>
+                        <StyledHighlightedLink
+                            to="/Blog/add"
+                            className="menu-link"
+                        >
+                            Add post
+                        </StyledHighlightedLink>
                     </li>
                 </LeftPanelUlStyle>
             </nav>

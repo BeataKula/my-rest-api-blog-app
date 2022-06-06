@@ -1,6 +1,7 @@
 import {
     SIGN_IN,
     SIGN_OUT,
+    CREATE_POST,
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
