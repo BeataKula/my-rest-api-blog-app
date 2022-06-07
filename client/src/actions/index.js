@@ -1,3 +1,5 @@
+import history from "../history";
+import api from "../apis/jsonLocalApi";
 import {
     SIGN_IN,
     SIGN_OUT,
@@ -10,6 +12,16 @@ import {
 
 import _ from "lodash";
 import { getPosts, getUserById } from "../apis/jsonLocalApi";
+
+export const createPost = (formValues) => async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const response = await api.post("/Blog/add", { ...formValues, userId });
+
+    dispatch({ type: CREATE_POST, payload: response.data });
+    // navigate to page with stream list
+    history.push("/");
+    history.go("/");
+};
 
 export const SignIn = (userId) => {
     return {

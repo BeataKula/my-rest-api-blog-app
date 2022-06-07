@@ -5,7 +5,7 @@ import { Wrapper, Title } from "./components/AppStyles";
 import AboutMePage from "./pages/AboutMePage";
 import WelcomePage from "./pages/WelcomePage";
 import ContactPage from "./pages/ContactPage";
-import AddPostPage from "./pages/AddPostPage";
+import CreatePostPage from "./pages/CreatePostPage";
 import AddCommentPage from "./pages/AddCommentPage";
 import PostList from "./pages/PostList";
 import LeftPanel from "./pages/LeftPanel";
@@ -29,7 +29,10 @@ class App extends Component<{}, {}> {
                             <Route path="/Welcome" element={<WelcomePage />} />
                             <Route path="/AboutMe" element={<AboutMePage />} />
                             <Route path="/Blog" element={<PostList />} />
-                            <Route path="/Blog/add" element={<AddPostPage />} />
+                            <Route
+                                path="/Blog/add"
+                                element={<CreatePostPage />}
+                            />
                             <Route
                                 path="/Comment/add"
                                 element={<AddCommentPage />}

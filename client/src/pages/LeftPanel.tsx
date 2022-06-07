@@ -43,14 +43,6 @@ const LeftPanel = () => {
                             Contact
                         </StyledLink>
                     </li>
-                    <li>
-                        <StyledHighlightedLink
-                            to="/Blog/add"
-                            className="menu-link"
-                        >
-                            Add post
-                        </StyledHighlightedLink>
-                    </li>
                 </LeftPanelUlStyle>
             </nav>
             <Outlet />

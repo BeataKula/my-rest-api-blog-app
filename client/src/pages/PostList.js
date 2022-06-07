@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { StyledButtonLink } from "../components/LinkComponent";
 
 const ADD_COMMENT_LINK = "/Comment/add";
+const ADD_BLOG_LINK = "/Blog/add";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -125,7 +126,7 @@ class PostList extends React.Component {
         return (
             <StyledButtonLink
                 className="ui top attached button  right floated olive basic "
-                to="blog/id/1/comment/new"
+                to={ADD_BLOG_LINK}
             >
                 Add post
             </StyledButtonLink>
