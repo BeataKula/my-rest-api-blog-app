@@ -1,3 +1,6 @@
+import postsReducer from "./reducers/postsReducer";
+import usersReducer from "./reducers/usersReducer";
+
 export interface IArticle {
     id: number;
     title: string;
@@ -99,3 +102,19 @@ export interface UserHeaderType {
 }
 
 export type DispatchUserType = (args: UserAction) => UserAction;
+
+export interface IPostForm {
+    title?: string,
+    body?: string
+};
+
+export interface AuthState {
+    isSignedIn: null | boolean;
+    userId: string | null;
+}
+
+export interface ReducersState {
+    postsReducer: typeof postsReducer,
+    usersReducer: typeof usersReducer,
+    auth: AuthState,
+}
