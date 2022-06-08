@@ -15,12 +15,19 @@ import { getPosts, getUserById } from "../apis/jsonLocalApi";
 
 export const createPost = (formValues) => async (dispatch, getState) => {
     const { userId } = getState().auth;
-    const response = await api.post("/Blog/add", { ...formValues, userId });
+
+    console.log("createPost:");
+    console.log("userId");
+    console.log(userId);
+
+    const response = await api.post("/posts", { ...formValues, userId });
+
+    console.log(response);
 
     dispatch({ type: CREATE_POST, payload: response.data });
     // navigate to page with stream list
-    history.push("/");
-    history.go("/");
+    history.push("/Blog");
+    history.go("/Blog");
 };
 
 export const SignIn = (userId) => {

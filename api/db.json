@@ -1,102 +1,49 @@
 {
   "posts": [
     {
-
-      "userId": 106890743082741394225,
-      "id": 7,
+      "userId": "106890743082741394225",
+      "id": 1,
       "title": "To może być mój pierwszy post na Blogu",
       "body": "Pieczenie - jak to się zaczęło"
-  
-  },
-  {
-  
-      "userId": 106890743082741394225,
-      "id": 8,
-      "title": "dolorem dolore est ipsam",
-      "body": "dignissimos aperiam dolorem qui eum\nfacilis quibusdam animi sint suscipit qui sint possimus cum\nquaerat magni maiores excepturi\nipsam ut commodi dolor voluptatum modi aut vitae"
-  
-  },
-  {
-  
-      "userId": 106890743082741394225,
-      "id": 9,
+    },
+    {
+      "userId": "106890743082741394225",
+      "id": 2,
       "title": "nesciunt iure omnis dolorem tempora et accusantium",
       "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas"
-  
-  },
-  {
-  
-      "userId": 106890743082741394225,
-      "id": 10,
+    },
+    {
+      "userId": "106890743082741394225",
+      "id": 3,
       "title": "optio molestias id quia eum",
       "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"
-  
-  },
-  {
-  
-      "userId": 2,
-      "id": 11,
-      "title": "et ea vero quia laudantium autem",
-      "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
-  
-  },
-  {
-  
-      "userId": 2,
-      "id": 12,
-      "title": "in quibusdam tempore odit est dolorem",
-      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
-  
-  },
-  {
-  
-      "userId": 3,
-      "id": 23,
-      "title": "maxime id vitae nihil numquam",
-      "body": "veritatis unde neque eligendi\nquae quod architecto quo neque vitae\nest illo sit tempora doloremque fugit quod\net et vel beatae sequi ullam sed tenetur perspiciatis"
-  
-  }
+    },
+    {
+      "title": "tytuł",
+      "body": "desc",
+      "userId": "106890743082741394225",
+      "id": 4
+    },
+    {
+      "title": "wetewtwet",
+      "body": "głupie cos",
+      "userId": "106890743082741394225",
+      "id": 5
+    }
   ],
-  "users" : [
-
+  "users": [
     {
-        "id": 106890743082741394225,
-        "name": "Beata Kula",
-        "username": "Aida77",
-        "email": "beata@kula.net.pl",
-        "address": {
-            "street": "Kulas Light",
-            "suite": "Apt. 556",
-            "city": "Gwenborough",
-            "zipcode": "92998-3874"
-        },
-        "phone": "1-770-736-8031 x56442"
-    },
-    {
-        "id": 2,
-        "name": "Ervin Howell",
-        "username": "Antonette",
-        "email": "Shanna@melissa.tv",
-        "address": {
-            "street": "Victor Plains",
-            "suite": "Suite 879",
-            "city": "Wisokyburgh",
-            "zipcode": "90566-7771"
-        },
-        "phone": "010-692-6593 x09125"
-    },
-    {
-        "id": 3,
-        "name": "Clementine Bauch",
-        "username": "Samantha",
-        "email": "Nathan@yesenia.net",
-        "address": {
-            "street": "Douglas Extension",
-            "suite": "Suite 847",
-            "city": "McKenziehaven",
-            "zipcode": "59590-4157"
-        },
-        "phone": "1-463-123-4447" 
+      "id": "106890743082741394225",
+      "name": "Beata Kula",
+      "username": "Aida77",
+      "email": "beata@kula.net.pl",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874"
+      },
+      "phone": "1-770-736-8031 x56442"
     }
   ]
 }

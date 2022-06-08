@@ -121,7 +121,6 @@ class PostList extends React.Component {
         );
     }
     renderCreate = () => {
-        console.log("renderCreate");
         //if (this.props.auth.isSignedIn) {
         return (
             <StyledButtonLink

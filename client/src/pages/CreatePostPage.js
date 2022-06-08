@@ -1,7 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
+import { reduxForm } from "redux-form";
+import PostForm from "../components/PostForm";
+import { createPost } from "../actions";
 
-const CreatePostPage = () => {
-    return <div>Add Blog</div>;
-};
+class CreatePostPage extends React.Component {
+    onSubmit = (formValues) => {
+        this.props.createPost(formValues);
+    };
 
-export default CreatePostPage;
+    render() {
+        return <PostForm onSubmit={this.onSubmit} />;
+    }
+}
+
+export default connect(null, { createPost })(CreatePostPage);
