@@ -4,6 +4,7 @@ import {
     SIGN_IN,
     SIGN_OUT,
     CREATE_POST,
+    EDIT_POST,
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
@@ -18,9 +19,24 @@ export const createPost = (formValues) => async (dispatch, getState) => {
     const response = await api.post("/posts", { ...formValues, userId });
 
     dispatch({ type: CREATE_POST, payload: response.data });
-    // navigate to page with stream list
-    history.push("/Blog");
-    history.go("/Blog");
+    setTimeout(() => {
+        history.push("/Blog");
+        history.go("/Blog");
+    }, 3000);
+};
+
+export const EditPost = (formValues) => async (dispatch, getState) => {
+    //console.log("EditPost");
+    const { userId } = getState().auth;
+    const response = await api.patch("/posts", { ...formValues, userId });
+
+    //console.log("response:");
+    //console.log(response);
+    dispatch({ type: EDIT_POST, payload: response.data });
+    setTimeout(() => {
+        history.push("/Blog");
+        history.go("/Blog");
+    }, 3000);
 };
 
 export const SignIn = (userId) => {

@@ -6,8 +6,8 @@ import Post from "../components/Post";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Button from "../components/Button";
-import { StyledButtonLink } from "../components/LinkComponent";
-import { PostProps, ReducersState } from "../AppTypes";
+import { StyledMarginButtonLink } from "../components/LinkComponent";
+import { PostFormAttr, ReducersState } from "../AppTypes";
 import Comment from "../components/Comment";
 import { bindActionCreators, Dispatch } from "redux";
 
@@ -88,7 +88,7 @@ class PostList extends Component<any, {}> {
     }
 
     renderList() {
-        const ListOfPosts = this.state.posts.map((post: PostProps) => {
+        const ListOfPosts = this.state.posts.map((post: PostFormAttr) => {
             const buttonId = "button-" + post["id"];
             return (
                 <li key={post["id"]}>
@@ -117,12 +117,12 @@ class PostList extends Component<any, {}> {
     renderCreate = () => {
         if (this.props.auth.isSignedIn) {
             return (
-                <StyledButtonLink
-                    className="ui top attached button  right floated olive basic "
+                <StyledMarginButtonLink
+                    className="ui button top right floated basic"
                     to={ADD_BLOG_LINK}
                 >
                     Add post
-                </StyledButtonLink>
+                </StyledMarginButtonLink>
             );
         }
     };
@@ -148,6 +148,7 @@ const mapStateToProps = (state: ReducersState) => {
         postsReducer: state.postsReducer,
         usersReducer: state.usersReducer,
         auth: state.auth,
+        form: state.form,
     };
 };
 

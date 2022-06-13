@@ -1,18 +1,43 @@
 import { connect } from "react-redux";
 import PostForm from "../components/PostForm";
 import { createPost } from "../actions";
-import { PostProps } from "../AppTypes";
-
-interface ConnectedProps {
-    createPost: (formValues: PostProps) => void;
-}
+import { PostFormAttr, ConnectedProps } from "../AppTypes";
+import Message from "../components/Message";
 
 const CreatePostPage = (props: ConnectedProps) => {
-    const onSubmit = (formValues: PostProps) => {
+    const onSubmit = (formValues: PostFormAttr) => {
         props.createPost(formValues);
     };
 
-    return <PostForm onSubmit={onSubmit} />;
+    const renderMessage = (id: number | undefined) => {
+        if (id !== undefined) {
+            return (
+                <Message
+                    showMessage={true}
+                    category={"positive"}
+                    headerText=""
+                    text={`Post with id = ${id} has been created`}
+                    color="olive"
+                    size="large"
+                />
+            );
+        } else {
+            return "";
+        }
+    };
+
+    return (
+        <>
+            {renderMessage(props.createPostResponse.postsReducer.data?.id)}
+            <PostForm onSubmit={onSubmit} />
+        </>
+    );
 };
 
-export default connect(null, { createPost })(CreatePostPage);
+const mapStateToProps = (state: any) => {
+    return {
+        createPostResponse: state,
+    };
+};
+
+export default connect(mapStateToProps, { createPost })(CreatePostPage);

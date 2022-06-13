@@ -2,6 +2,8 @@ import {
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
+    CREATE_POST,
+    EDIT_POST,
 } from "../actions/actionsTypes";
 import { PostAction } from "../AppTypes";
 
@@ -13,6 +15,7 @@ export default (
     },
     action: PostAction
 ) => {
+    //console.log(action);
     switch (action.type) {
         case GET_POSTS_REQUEST:
             return {
@@ -41,7 +44,20 @@ export default (
                     data: action.payload,
                 },
             };
+        case CREATE_POST:
+            return {
+                ...state,
+                data: action.payload,
+            };
+        case EDIT_POST:
+            console.log("EDIT_POST");
+            return {
+                ...state,
+                id: action.payload.id,
+                data: action.payload,
+            };
         default:
+            console.log("DEFAULT");
             return state;
     }
 };

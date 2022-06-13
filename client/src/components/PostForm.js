@@ -2,6 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import styled from "styled-components";
 import Message from "./Message";
+import { useParams } from "react-router-dom";
 
 export const StyledPostForm = styled.form`
     display: block;
@@ -10,6 +11,13 @@ export const StyledPostForm = styled.form`
     width: 40%;
     margin: 10px;
 `;
+
+const PostFormWrapper = (props) => {
+    const { id } = useParams();
+
+    return <PostForm id={id} {...props} />;
+};
+
 class PostForm extends React.Component {
     renderError({ error, touched }) {
         if (touched && error) {
@@ -38,6 +46,8 @@ class PostForm extends React.Component {
     };
 
     onSubmit = (formValues) => {
+        console.log("PostForm");
+        console.log(formValues);
         this.props.onSubmit(formValues);
     };
 
@@ -48,6 +58,7 @@ class PostForm extends React.Component {
                     className="ui form error"
                     onSubmit={this.props.handleSubmit(this.onSubmit)}
                 >
+                    <input name="id" type="hidden" value="{this.props.id}" />
                     <Field
                         name="title"
                         component={this.renderInput}
@@ -82,4 +93,4 @@ const validate = (formValues) => {
 export default reduxForm({
     form: "postForm",
     validate,
-})(PostForm);
+})(PostFormWrapper);

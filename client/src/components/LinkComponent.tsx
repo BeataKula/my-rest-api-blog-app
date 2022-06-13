@@ -44,6 +44,9 @@ export const StyledHighlightedLink = styled(LinkComponent)`
 
 export const StyledButtonLink = styled(LinkComponent)`
     display: block;
+`;
+
+export const StyledMarginButtonLink = styled(LinkComponent)`
+    display: block;
     margin: 10px 10px !important;
-    width: 100px !important;
 `;

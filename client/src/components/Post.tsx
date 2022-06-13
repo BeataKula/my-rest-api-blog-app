@@ -1,6 +1,11 @@
 import UserHeader from "./UserHeader";
 import styled from "styled-components";
-import { PostProps } from "../AppTypes";
+import { ReducersState, PostProps } from "../AppTypes";
+import { StyledButtonLink } from "./LinkComponent";
+import { connect } from "react-redux";
+
+const EDIT_BLOG_LINK = "/Blog/edit";
+const DELETE_BLOG_LINK = "/Blog/edit";
 
 const PostElementContentStyle = styled.section`
     padding: 5px;
@@ -9,6 +14,12 @@ const PostElementContentStyle = styled.section`
 export const PostAuthor = styled.h3`
     text-align: left;
     padding: 5px;
+`;
+
+export const PostAdmin = styled.div`
+    text-align: right;
+    padding: 5px;
+    margin: 0px;
 `;
 
 export const PostTitle = styled.h4`
@@ -20,12 +31,37 @@ export const PostTitle = styled.h4`
     font-weight: bold;
 `;
 
-const Post: React.FunctionComponent<PostProps> = ({
-    id,
-    userId,
-    title,
-    body,
-}) => {
+const renderDelete = (props: PostProps) => {
+    if (props.auth !== undefined && props.auth.isSignedIn) {
+        const deleteBlogLink = `${DELETE_BLOG_LINK}/id/${props.id}`;
+        return (
+            <StyledButtonLink
+                className="ui left attached button olive basic"
+                to={deleteBlogLink}
+            >
+                Delete
+            </StyledButtonLink>
+        );
+    }
+};
+
+const renderEdit = (props: PostProps) => {
+    if (props.auth !== undefined && props.auth.isSignedIn) {
+        const editBlogLink = `${EDIT_BLOG_LINK}/id/${props.id}`;
+        return (
+            <>
+                <StyledButtonLink
+                    className="right attached ui button olive basic"
+                    to={editBlogLink}
+                >
+                    Edit
+                </StyledButtonLink>
+            </>
+        );
+    }
+};
+
+const Post: React.FunctionComponent<PostProps> = (props) => {
     let user = {
         userById: {
             isLoading: false,
@@ -45,15 +81,24 @@ const Post: React.FunctionComponent<PostProps> = ({
 
     return (
         <>
+            <PostAdmin>
+                {renderDelete(props)}
+                {renderEdit(props)}
+            </PostAdmin>
             <PostAuthor>
-                <UserHeader user={user} userId={userId} />
+                <UserHeader user={user} userId={props.userId} />
             </PostAuthor>
             <PostTitle>
-                <b>{title}</b>
+                <b>{props.title}</b>
             </PostTitle>
-            <PostElementContentStyle>{body}</PostElementContentStyle>
+            <PostElementContentStyle>{props.body}</PostElementContentStyle>
         </>
     );
 };
+const mapStateToProps = (state: ReducersState) => {
+    return {
+        auth: state.auth,
+    };
+};
 
-export default Post;
+export default connect(mapStateToProps, null)(Post);

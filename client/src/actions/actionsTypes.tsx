@@ -10,3 +10,4 @@ export const GET_USERS_BY_ID_SUCCESS = "GET_USERS_BY_ID_SUCCESS";
 export const GET_USERS_BY_ID_FAIL = "GET_USERS_BY_ID_FAIL";
 
 export const CREATE_POST = "CREATE_POST";
+export const EDIT_POST = "EDIT_POST";
