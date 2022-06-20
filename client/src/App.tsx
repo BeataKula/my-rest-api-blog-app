@@ -39,7 +39,7 @@ class App extends Component<{}, {}> {
                                 element={<EditPostPage />}
                             />
                             <Route
-                                path="/streams/delete/id/:id"
+                                path="/Blog/delete/id/:id"
                                 element={<PostDelete />}
                             />
                             <Route

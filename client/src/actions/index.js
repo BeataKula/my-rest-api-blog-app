@@ -5,6 +5,8 @@ import {
     SIGN_OUT,
     CREATE_POST,
     EDIT_POST,
+    DELETE_POST,
+    FETCH_POST,
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
@@ -14,29 +16,33 @@ import {
 import _ from "lodash";
 import { getPosts, getUserById } from "../apis/jsonLocalApi";
 
+const returnToPostPage = () => {
+    setTimeout(() => {
+        history.push("/Blog");
+        history.go("/Blog");
+    }, 1000);
+};
+
 export const createPost = (formValues) => async (dispatch, getState) => {
     const { userId } = getState().auth;
     const response = await api.post("/posts", { ...formValues, userId });
 
     dispatch({ type: CREATE_POST, payload: response.data });
-    setTimeout(() => {
-        history.push("/Blog");
-        history.go("/Blog");
-    }, 3000);
+    returnToPostPage();
 };
 
-export const EditPost = (formValues) => async (dispatch, getState) => {
-    //console.log("EditPost");
-    const { userId } = getState().auth;
-    const response = await api.patch("/posts", { ...formValues, userId });
+export const editPost = (formValues, id) => async (dispatch) => {
+    const response = await api.patch(`/posts/${id}`, { ...formValues });
 
-    //console.log("response:");
-    //console.log(response);
     dispatch({ type: EDIT_POST, payload: response.data });
-    setTimeout(() => {
-        history.push("/Blog");
-        history.go("/Blog");
-    }, 3000);
+    returnToPostPage();
+};
+
+export const deletePost = (id) => async (dispatch) => {
+    await api.delete(`/posts/${id}`);
+
+    dispatch({ type: DELETE_POST, payload: id });
+    returnToPostPage();
 };
 
 export const SignIn = (userId) => {
@@ -113,6 +119,13 @@ export const fetchPosts = () => async (dispatch) => {
 
         dispatch({ type: GET_POSTS_FAIL, payload: payload });
     }
+};
+
+export const fetchPost = (id) => {
+    return async (dispatch) => {
+        const response = await api.get(`/posts/${id}`);
+        dispatch({ type: FETCH_POST, payload: response.data });
+    };
 };
 
 export const fetchUser = (id) => async (dispatch) => {

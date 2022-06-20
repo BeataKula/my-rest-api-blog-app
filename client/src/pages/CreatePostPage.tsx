@@ -21,8 +21,6 @@ const CreatePostPage = (props: ConnectedProps) => {
                     size="large"
                 />
             );
-        } else {
-            return "";
         }
     };
 

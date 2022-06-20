@@ -1,27 +1,35 @@
 import { connect } from "react-redux";
 import PostForm from "../components/PostForm";
-import { EditPost } from "../actions";
-import { PostFormAttr } from "../AppTypes";
+import { editPost } from "../actions";
+import { EditPostConnectedProps, PostFormAttr } from "../AppTypes";
+import { useParams } from "react-router-dom";
+import _ from "lodash";
 
-interface ConnectedProps {
-    EditPost: (formValues: PostFormAttr) => void;
-}
+const EditPostPageWrapper = (props: EditPostConnectedProps) => {
+    return <EditPostPage {...props} />;
+};
 
-const EditPostPage = (props: ConnectedProps) => {
+const EditPostPage = (props: EditPostConnectedProps) => {
+    const { id } = useParams();
     const onSubmit = (formValues: PostFormAttr) => {
-        //console.log("formValues");
-        //console.log(formValues);
-        props.EditPost(formValues);
+        props.editPost(formValues, id);
     };
-    console.log(props);
-    return <PostForm onSubmit={onSubmit} />;
+
+    const listPost: any = props.editPostResponse.postsReducer.allList.data;
+
+    if (id !== undefined) {
+        const index = Number(id) - 1;
+        const data = listPost[index];
+
+        return <PostForm initialValues={data} onSubmit={onSubmit} />;
+    } else {
+        return <PostForm onSubmit={onSubmit} />;
+    }
 };
 const mapStateToProps = (state: any) => {
-    //console.log(state.data.postsReducer.data.id);
-    console.log(state);
     return {
         editPostResponse: state,
     };
 };
 
-export default connect(mapStateToProps, { EditPost })(EditPostPage);
+export default connect(mapStateToProps, { editPost })(EditPostPageWrapper);

@@ -12,12 +12,6 @@ export const StyledPostForm = styled.form`
     margin: 10px;
 `;
 
-const PostFormWrapper = (props) => {
-    const { id } = useParams();
-
-    return <PostForm id={id} {...props} />;
-};
-
 class PostForm extends React.Component {
     renderError({ error, touched }) {
         if (touched && error) {
@@ -45,9 +39,25 @@ class PostForm extends React.Component {
         );
     };
 
-    onSubmit = (formValues) => {
-        console.log("PostForm");
-        console.log(formValues);
+    renderPostIdInput = ({ input, label, meta }) => {
+        const { id } = useParams();
+
+        if (id !== undefined) {
+            return (
+                <Field
+                    style={{ display: "none" }}
+                    name="id"
+                    component=<div className="field">
+                        <label>{label}</label>
+                        <input {...input} autoComplete="off" />
+                    </div>
+                    label="Post ID"
+                />
+            );
+        } else return <></>;
+    };
+
+    onSubmit = (formValues, props) => {
         this.props.onSubmit(formValues);
     };
 
@@ -58,14 +68,13 @@ class PostForm extends React.Component {
                     className="ui form error"
                     onSubmit={this.props.handleSubmit(this.onSubmit)}
                 >
-                    <input name="id" type="hidden" value="{this.props.id}" />
                     <Field
                         name="title"
                         component={this.renderInput}
                         label="Enter Title"
                     />
                     <Field
-                        name="body"
+                        name="description"
                         component={this.renderInput}
                         label="Enter Description"
                     />
@@ -87,10 +96,14 @@ const validate = (formValues) => {
         errors.description = "You must enter a description";
     }
 
+    if (!formValues.id) {
+        errors.id = "An error occurred - there is no id";
+    }
+
     return errors;
 };
 
 export default reduxForm({
     form: "postForm",
     validate,
-})(PostFormWrapper);
+})(PostForm);

@@ -1,10 +1,7 @@
-import postsReducer from "./reducers/postsReducer";
-import usersReducer from "./reducers/usersReducer";
-
 export interface IArticle {
     id: number;
     title: string;
-    body: string;
+    description: string;
 }
 
 export type ButtonType = {
@@ -35,7 +32,7 @@ export interface PostFormAttr {
     userId: number;
     id: number;
     title: string;
-    body: string;
+    description: string;
 }
 
 export type PostPayload = {
@@ -96,7 +93,7 @@ export type DispatchUserType = (args: UserAction) => UserAction;
 
 export interface IPostForm {
     title?: string,
-    body?: string
+    description?: string
 };
 
 export interface AuthState {
@@ -108,7 +105,7 @@ export interface ReducersState {
     postsReducer: postReducerType,
     usersReducer: { userById: UserByIdResponse }[],
     auth: AuthState,
-    form: {}
+    form: {postForm: any}
 }
 
 export type PostState = {
@@ -127,7 +124,7 @@ export interface PostProps {
     userId: number,
     id: number,
     title: string,
-    body: string
+    description: string
 }
 
 export type postReducerType = {
@@ -148,4 +145,9 @@ export interface ConnectedProps {
         auth: AuthState,
         form: {postForm: any}
     };
+}
+export interface EditPostConnectedProps {
+    editPost: (formValues: PostFormAttr, id?: string, ) => void;
+    editPostResponse: ReducersState;
+    id?: String
 }

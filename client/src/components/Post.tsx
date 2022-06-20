@@ -5,7 +5,7 @@ import { StyledButtonLink } from "./LinkComponent";
 import { connect } from "react-redux";
 
 const EDIT_BLOG_LINK = "/Blog/edit";
-const DELETE_BLOG_LINK = "/Blog/edit";
+const DELETE_BLOG_LINK = "/Blog/delete";
 
 const PostElementContentStyle = styled.section`
     padding: 5px;
@@ -91,7 +91,9 @@ const Post: React.FunctionComponent<PostProps> = (props) => {
             <PostTitle>
                 <b>{props.title}</b>
             </PostTitle>
-            <PostElementContentStyle>{props.body}</PostElementContentStyle>
+            <PostElementContentStyle>
+                {props.description}
+            </PostElementContentStyle>
         </>
     );
 };

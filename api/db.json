@@ -2,27 +2,9 @@
   "posts": [
     {
       "userId": "106890743082741394225",
-      "id": 1,
       "title": "To może być mój pierwszy post na Blogu",
-      "body": "Pieczenie - jak to się zaczęło"
-    },
-    {
-      "userId": "106890743082741394225",
-      "id": 2,
-      "title": "nesciunt iure omnis dolorem tempora et accusantium",
-      "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas"
-    },
-    {
-      "userId": "106890743082741394225",
-      "id": 3,
-      "title": "AAAAAAAAAAAA",
-      "body": "BBBBBBBBBBBBBBBBBBBBB"
-    },
-    {
-      "title": "ewrewtr",
-      "body": "wtbvvbnmbv",
-      "userId": "106890743082741394225",
-      "id": 4
+      "description": "Pieczenie - jak to się zaczęło",
+      "id": 1
     }
   ],
   "users": [
