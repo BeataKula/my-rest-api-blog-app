@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Button from "../components/Button";
 import { StyledMarginButtonLink } from "../components/LinkComponent";
-import { PostFormAttr, ReducersState } from "../AppTypes";
+import { PostFormAttr, postReducerType, ReducersState } from "../AppTypes";
 import Comment from "../components/Comment";
 import { bindActionCreators, Dispatch } from "redux";
 
@@ -45,6 +45,20 @@ class PostList extends Component<any, {}> {
         isloaded: false,
     };
 
+    canSetPostsInState(allList: postReducerType) {
+        if (!allList.error && !allList.isLoading && allList.data != null)
+            return true;
+        else return false;
+    }
+
+    setIsLoadedOnErrorState(allList: postReducerType) {
+        if (allList.error && !this.state.isloaded) {
+            this.setState({
+                isloaded: true,
+            });
+        }
+    }
+
     componentDidMount() {
         this.props.fetchPostsAndUsers();
     }
@@ -52,22 +66,13 @@ class PostList extends Component<any, {}> {
     componentDidUpdate() {
         const allList = this.props.postsReducer.allList;
 
-        if (
-            !allList.error &&
-            !allList.isLoading &&
-            allList.data != null &&
-            !this.state.isloaded
-        ) {
+        if (this.canSetPostsInState(allList) && !this.state.isloaded) {
             this.setState({
                 posts: allList.data,
                 isloaded: true,
             });
         } else {
-            if (allList.error && !this.state.isloaded) {
-                this.setState({
-                    isloaded: true,
-                });
-            }
+            this.setIsLoadedOnErrorState(allList);
         }
     }
 

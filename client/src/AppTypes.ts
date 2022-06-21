@@ -91,11 +91,6 @@ export interface UserHeaderType {
 
 export type DispatchUserType = (args: UserAction) => UserAction;
 
-export interface IPostForm {
-    title?: string,
-    description?: string
-};
-
 export interface AuthState {
     isSignedIn: null | boolean;
     userId: string | null;

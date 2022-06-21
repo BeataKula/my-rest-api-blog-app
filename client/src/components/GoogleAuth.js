@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import { connect } from "react-redux";
 import { SignIn, SignOut } from "../actions";
 import { bindActionCreators } from "redux";
+
+const AuthButtonDiv = styled.div`
+    width: 100%;
+    text-align: right;
+    margin: 5px;
+`;
 
 let authInstance = null;
 
@@ -36,7 +43,7 @@ const GoogleAuth = (props) => {
                 .then(() => {
                     authInstance = window.gapi.auth2.getAuthInstance();
                     onAuthChange(authInstance.isSignedIn.get());
-                    // Ustawienie nasłuchu w przypadku zmiany statusu zalogowania usera
+                    //listening of user login status change
                     authInstance.isSignedIn.listen(onAuthChange);
                 });
         });
@@ -50,54 +57,36 @@ const mapStateToProps = (state) => {
     };
 };
 
+const generateAuthButton = (startIcon, onClick, title) => {
+    return (
+        <AuthButtonDiv>
+            <Button
+                variant="contained"
+                color="default"
+                startIcon={startIcon}
+                onClick={onClick}
+                id="sign-out-button"
+            >
+                {title}
+            </Button>
+        </AuthButtonDiv>
+    );
+};
+
 const renderAuthButton = (isSignedIn) => {
     if (isSignedIn === null) {
         return null;
     } else if (isSignedIn) {
-        return (
-            <div
-                style={{
-                    width: "100%",
-                    textAlign: "right",
-                }}
-            >
-                <Button
-                    style={{
-                        textTransform: "none",
-                        margin: "5px",
-                    }}
-                    variant="contained"
-                    color="default"
-                    startIcon={<ExitToAppIcon />}
-                    onClick={onSignOutClick}
-                    id="sign-out-button"
-                >
-                    Sign Out
-                </Button>
-            </div>
+        return generateAuthButton(
+            <ExitToAppIcon />,
+            onSignOutClick,
+            "Sign Out"
         );
     } else {
-        return (
-            <div
-                style={{
-                    width: "100%",
-                    textAlign: "right",
-                }}
-            >
-                <Button
-                    style={{
-                        textTransform: "none",
-                        margin: "5px",
-                    }}
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<MeetingRoomIcon />}
-                    onClick={onSignInClick}
-                    id="sign-in-button"
-                >
-                    Sign In
-                </Button>
-            </div>
+        return generateAuthButton(
+            <MeetingRoomIcon />,
+            onSignInClick,
+            "Sign In"
         );
     }
 };

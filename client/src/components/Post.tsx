@@ -88,9 +88,7 @@ const Post: React.FunctionComponent<PostProps> = (props) => {
             <PostAuthor>
                 <UserHeader user={user} userId={props.userId} />
             </PostAuthor>
-            <PostTitle>
-                <b>{props.title}</b>
-            </PostTitle>
+            <PostTitle>{props.title}</PostTitle>
             <PostElementContentStyle>
                 {props.description}
             </PostElementContentStyle>
