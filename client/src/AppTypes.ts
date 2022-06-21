@@ -1,7 +1,7 @@
 export interface IArticle {
     id: number;
     title: string;
-    body: string;
+    description: string;
 }
 
 export type ButtonType = {
@@ -28,15 +28,15 @@ export type MessageProps = {
     size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
 };
 
-export interface PostProps {
+export interface PostFormAttr {
     userId: number;
     id: number;
     title: string;
-    body: string;
+    description: string;
 }
 
 export type PostPayload = {
-    posts: PostProps[],
+    posts: PostFormAttr[],
     status: number,
     text: string;
     error: boolean,
@@ -44,17 +44,8 @@ export type PostPayload = {
     messageText: string,
     showMessage: boolean,
     categoryMessage: categoryType,
+    id?: number
 };
-
-export type PostState = {
-    isLoading: boolean,
-    error: boolean,
-    allList: {
-        isLoading: boolean,
-        error: boolean,
-        data: PostPayload;
-    }
-} 
 
 export type PostAction = {
     type: string;
@@ -99,3 +90,59 @@ export interface UserHeaderType {
 }
 
 export type DispatchUserType = (args: UserAction) => UserAction;
+
+export interface AuthState {
+    isSignedIn: null | boolean;
+    userId: string | null;
+}
+
+export interface ReducersState {
+    postsReducer: postReducerType,
+    usersReducer: { userById: UserByIdResponse }[],
+    auth: AuthState,
+    form: {postForm: any}
+}
+
+export type PostState = {
+    isLoading: boolean,
+    error: boolean,
+    allList: {
+        isLoading: boolean,
+        error: boolean,
+        data: PostPayload;
+    }
+} 
+
+export interface PostProps {
+    auth?: AuthState,
+    dispatch?: DispatchUserType,
+    userId: number,
+    id: number,
+    title: string,
+    description: string
+}
+
+export type postReducerType = {
+    isLoading: boolean,
+    error: boolean,
+    data?: PostFormAttr;
+    allList: {
+        isLoading: boolean,
+        error: boolean,
+        data: PostFormAttr;
+    }
+}
+export interface ConnectedProps {
+    createPost: (formValues: PostFormAttr) => void;
+    createPostResponse: {
+        postsReducer: postReducerType,
+        usersReducer: { userById: UserByIdResponse }[],
+        auth: AuthState,
+        form: {postForm: any}
+    };
+}
+export interface EditPostConnectedProps {
+    editPost: (formValues: PostFormAttr, id?: string, ) => void;
+    editPostResponse: ReducersState;
+    id?: String
+}
