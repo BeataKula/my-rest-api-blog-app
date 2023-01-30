@@ -1,34 +1,25 @@
 import UserHeader from "./UserHeader";
-import Button from "./Button";
 import styled from "styled-components";
-import { PostProps } from "../AppTypes";
+import { ReducersState, PostProps } from "../AppTypes";
+import { StyledButtonLink } from "./LinkComponent";
+import { connect } from "react-redux";
 
-const addComment = () => {
-    alert("Dodawanie komenarzy już wkrótce!");
-};
-
-const PostElementStyle = styled.section`
-    margin: 10px;
-    padding: 0px;
-    border: #dcedc8 solid 1px;
-    background-color: #f1f8e9;
-`;
+const EDIT_BLOG_LINK = "/Blog/edit";
+const DELETE_BLOG_LINK = "/Blog/delete";
 
 const PostElementContentStyle = styled.section`
     padding: 5px;
 `;
 
-const PostElementFooterStyle = styled.section`
-    display: block;
-    margin: 0px;
-    background-color: #f5f5f5;
-    border-top: #dcedc8 solid 1px;
-    min-height: 10vh;
-`;
-
 export const PostAuthor = styled.h3`
     text-align: left;
     padding: 5px;
+`;
+
+export const PostAdmin = styled.div`
+    text-align: right;
+    padding: 5px;
+    margin: 0px;
 `;
 
 export const PostTitle = styled.h4`
@@ -40,14 +31,37 @@ export const PostTitle = styled.h4`
     font-weight: bold;
 `;
 
-const Post: React.FunctionComponent<PostProps> = ({
-    id,
-    userId,
-    title,
-    body,
-}) => {
-    const buttonId = "button-" + id.toString();
+const renderDelete = (props: PostProps) => {
+    if (props.auth !== undefined && props.auth.isSignedIn) {
+        const deleteBlogLink = `${DELETE_BLOG_LINK}/id/${props.id}`;
+        return (
+            <StyledButtonLink
+                className="ui left attached button olive basic"
+                to={deleteBlogLink}
+            >
+                Delete
+            </StyledButtonLink>
+        );
+    }
+};
 
+const renderEdit = (props: PostProps) => {
+    if (props.auth !== undefined && props.auth.isSignedIn) {
+        const editBlogLink = `${EDIT_BLOG_LINK}/id/${props.id}`;
+        return (
+            <>
+                <StyledButtonLink
+                    className="right attached ui button olive basic"
+                    to={editBlogLink}
+                >
+                    Edit
+                </StyledButtonLink>
+            </>
+        );
+    }
+};
+
+const Post: React.FunctionComponent<PostProps> = (props) => {
     let user = {
         userById: {
             isLoading: false,
@@ -66,26 +80,25 @@ const Post: React.FunctionComponent<PostProps> = ({
     };
 
     return (
-        <li>
-            <PostElementStyle>
-                <PostAuthor>
-                    <UserHeader user={user} userId={userId} />
-                </PostAuthor>
-                <PostTitle>
-                    <b>{title}</b>
-                </PostTitle>
-                <PostElementContentStyle>{body}</PostElementContentStyle>
-                <PostElementFooterStyle>
-                    <Button
-                        id={buttonId}
-                        about="commentPrimary"
-                        name="Dodaj komentarz"
-                        onClick={addComment}
-                    />
-                </PostElementFooterStyle>
-            </PostElementStyle>
-        </li>
+        <>
+            <PostAdmin>
+                {renderDelete(props)}
+                {renderEdit(props)}
+            </PostAdmin>
+            <PostAuthor>
+                <UserHeader user={user} userId={props.userId} />
+            </PostAuthor>
+            <PostTitle>{props.title}</PostTitle>
+            <PostElementContentStyle>
+                {props.description}
+            </PostElementContentStyle>
+        </>
     );
 };
+const mapStateToProps = (state: ReducersState) => {
+    return {
+        auth: state.auth,
+    };
+};
 
-export default Post;
+export default connect(mapStateToProps, null)(Post);

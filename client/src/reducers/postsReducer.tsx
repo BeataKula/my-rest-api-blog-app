@@ -1,7 +1,12 @@
+import _ from "lodash";
 import {
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
+    CREATE_POST,
+    EDIT_POST,
+    DELETE_POST,
+    FETCH_POST,
 } from "../actions/actionsTypes";
 import { PostAction } from "../AppTypes";
 
@@ -41,7 +46,37 @@ export default (
                     data: action.payload,
                 },
             };
+        case CREATE_POST:
+            return {
+                ...state,
+                data: action.payload,
+            };
+        case EDIT_POST:
+            return {
+                ...state,
+                id: action.payload.id,
+                data: action.payload,
+            };
+        case FETCH_POST:
+            return {
+                ...state,
+                id: action.payload.id,
+                data: action.payload,
+            };
+        case DELETE_POST:
+            return deleteAction;
         default:
             return state;
     }
+};
+
+const deleteAction = (
+    state = {
+        isLoading: null,
+        error: null,
+        data: null,
+    },
+    action: any
+) => {
+    return _.omit(state, action.payload);
 };

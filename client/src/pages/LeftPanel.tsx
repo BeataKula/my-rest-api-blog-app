@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import StyledLink from "../components/LinkComponent";
+import { StyledLink } from "../components/LinkComponent";
 
 export const LeftPanelStyle = styled.div`
     text-align: left;
