@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 import {
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
@@ -7,10 +7,10 @@ import {
     EDIT_POST,
     DELETE_POST,
     FETCH_POST,
-} from "../actions/actionsTypes";
-import { PostAction } from "../AppTypes";
+} from '../../actions/actionsTypes';
+import { PostAction } from '../../AppTypes';
 
-export default (
+const postReducer = (
     state = {
         isLoading: null,
         error: null,
@@ -80,3 +80,5 @@ const deleteAction = (
 ) => {
     return _.omit(state, action.payload);
 };
+
+export default postReducer;

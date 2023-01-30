@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { PostState, UserByIdResponse, UserHeaderType } from "../AppTypes";
+import React from 'react';
+import { connect } from 'react-redux';
+import { PostState, UserByIdResponse, UserHeaderType } from '../AppTypes';
 class UserHeader extends React.Component<UserHeaderType> {
     render() {
         if (
@@ -9,17 +9,17 @@ class UserHeader extends React.Component<UserHeaderType> {
             this.props.user.userById.data !== undefined
         ) {
             const user = this.props.user.userById.data;
-            return <div className="header">{user.name}</div>;
+            return <div className='header'>{user.name}</div>;
         } else {
-            return <div className="header">Problem z userem!</div>;
+            return <div className='header'>Problem z userem!</div>;
         }
     }
 }
 
 const mapStateToProps = (
     state: {
-        postsReducer: PostState;
-        usersReducer: { userById: UserByIdResponse }[];
+        posts: PostState;
+        users: { userById: UserByIdResponse }[];
     },
     props: {
         userId: number;
@@ -29,8 +29,8 @@ const mapStateToProps = (
     }
 ) => {
     let user;
-    let postsReducer = state.postsReducer;
-    let usersReducer = state.usersReducer;
+    let posts = state.posts;
+    let users = state.users;
 
     function checkId(user: { userById: UserByIdResponse }) {
         if (user.userById.data.id === props.userId) {
@@ -38,10 +38,10 @@ const mapStateToProps = (
         }
     }
 
-    if (state.usersReducer !== undefined) {
-        user = state.usersReducer.find(checkId);
+    if (state.users !== undefined) {
+        user = state.users.find(checkId);
     }
-    return { user, postsReducer, usersReducer };
+    return { user, posts, users };
 };
 
 export default connect(mapStateToProps)(UserHeader);

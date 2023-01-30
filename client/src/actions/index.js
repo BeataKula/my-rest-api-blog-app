@@ -1,5 +1,5 @@
-import history from "../history";
-import api from "../apis/jsonLocalApi";
+import history from '../history';
+import api from '../apis/jsonLocalApi';
 import {
     SIGN_IN,
     SIGN_OUT,
@@ -11,21 +11,21 @@ import {
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
     GET_USERS_BY_ID_SUCCESS,
-} from "./actionsTypes";
+} from './actionsTypes';
 
-import _ from "lodash";
-import { getPosts, getUserById } from "../apis/jsonLocalApi";
+import _ from 'lodash';
+import { getPosts, getUserById } from '../apis/jsonLocalApi';
 
 const returnToPostPage = () => {
     setTimeout(() => {
-        history.push("/Blog");
-        history.go("/Blog");
+        history.push('/Blog');
+        history.go('/Blog');
     }, 1000);
 };
 
 export const createPost = (formValues) => async (dispatch, getState) => {
     const { userId } = getState().auth;
-    const response = await api.post("/posts", { ...formValues, userId });
+    const response = await api.post('/posts', { ...formValues, userId });
 
     dispatch({ type: CREATE_POST, payload: response.data });
     returnToPostPage();
@@ -61,8 +61,8 @@ export const SignOut = () => {
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(fetchPosts());
 
-    _.chain(getState().postsReducer.allList.data)
-        .map("userId")
+    _.chain(getState().posts.allList.data)
+        .map('userId')
         .uniq()
         .forEach((id) => dispatch(fetchUser(id)))
         .value();
@@ -74,12 +74,12 @@ export const fetchPosts = () => async (dispatch) => {
         payload: {
             posts: [],
             status: 0,
-            text: "",
+            text: '',
             error: false,
-            headerMessageText: "",
-            messageText: "",
+            headerMessageText: '',
+            messageText: '',
             showMessage: false,
-            categoryMessage: "info",
+            categoryMessage: 'info',
         },
     });
 
@@ -96,10 +96,10 @@ export const fetchPosts = () => async (dispatch) => {
             status: response.status,
             text: response.statusText,
             error: isError,
-            headerMessageText: "",
-            messageText: "",
+            headerMessageText: '',
+            messageText: '',
             showMessage: false,
-            categoryMessage: "info",
+            categoryMessage: 'info',
         };
 
         dispatch({ type: GET_POSTS_SUCCESS, payload: payload.posts });
@@ -111,10 +111,10 @@ export const fetchPosts = () => async (dispatch) => {
             error: true,
             headerMessageText: "We're sorry we can't show you posts!",
             messageText:
-                "An error occurred while loading data: " +
+                'An error occurred while loading data: ' +
                 error.toJSON().message,
             showMessage: true,
-            categoryMessage: "negative",
+            categoryMessage: 'negative',
         };
 
         dispatch({ type: GET_POSTS_FAIL, payload: payload });
