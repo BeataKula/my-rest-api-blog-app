@@ -1,6 +1,6 @@
-import UserHeader from "./UserHeader";
-import styled from "styled-components";
-import { TextareaAutosize } from "@material-ui/core";
+import UserHeader from './UserHeader';
+import styled from 'styled-components';
+import { TextareaAutosize } from '@material-ui/core';
 
 const CommentElementContentStyle = styled.section`
     padding: 20px;
@@ -20,12 +20,12 @@ const Comment: React.FunctionComponent<any> = ({ id, userId, comment }) => {
             error: false,
             data: {
                 id: 0,
-                name: "",
-                username: "",
-                email: "",
+                name: '',
+                username: '',
+                email: '',
                 address: {},
-                phone: "",
-                website: "",
+                phone: '',
+                website: '',
                 company: {},
             },
         },
@@ -38,9 +38,9 @@ const Comment: React.FunctionComponent<any> = ({ id, userId, comment }) => {
                     <UserHeader user={user} userId={userId} />
                 </CommentAuthor>
                 <TextareaAutosize
-                    aria-label="minimum height"
+                    aria-label='minimum height'
                     minRows={3}
-                    placeholder="Add comment"
+                    placeholder='Add comment'
                     style={{ width: 200 }}
                 />
             </CommentElementContentStyle>

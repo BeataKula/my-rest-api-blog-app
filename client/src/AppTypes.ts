@@ -81,8 +81,8 @@ export type UserByIdResponse  = {
 }
 
 export interface UserHeaderType {
-    postsReducer: PostState;
-    usersReducer: { userById: UserByIdResponse }[];
+    posts: PostState;
+    users: { userById: UserByIdResponse }[];
     user?: {
         userById: UserByIdResponse
     };
@@ -97,8 +97,8 @@ export interface AuthState {
 }
 
 export interface ReducersState {
-    postsReducer: postReducerType,
-    usersReducer: { userById: UserByIdResponse }[],
+    posts: postReducerType,
+    users: { userById: UserByIdResponse }[],
     auth: AuthState,
     form: {postForm: any}
 }
@@ -135,8 +135,8 @@ export type postReducerType = {
 export interface ConnectedProps {
     createPost: (formValues: PostFormAttr) => void;
     createPostResponse: {
-        postsReducer: postReducerType,
-        usersReducer: { userById: UserByIdResponse }[],
+        posts: postReducerType,
+        users: { userById: UserByIdResponse }[],
         auth: AuthState,
         form: {postForm: any}
     };
@@ -146,3 +146,13 @@ export interface EditPostConnectedProps {
     editPostResponse: ReducersState;
     id?: String
 }
+
+export type InputMeta = { error: String; touched: boolean; }
+
+export type InputProps = {
+    input: {},
+    label: string,
+    meta: InputMeta
+}
+
+export type onSubmitType = (formValues: PostFormAttr) => void;

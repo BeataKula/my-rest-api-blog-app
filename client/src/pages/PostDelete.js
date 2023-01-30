@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import Modal from "../components/Modal";
-import history from "../history";
-import { deletePost, fetchPost } from "../actions";
+import Modal from '../components/Modal';
+import history from '../history';
+import { deletePost, fetchPost } from '../actions';
 
 const onDismiss = () => {
-    history.push("/Blog");
-    history.go("/Blog");
+    history.push('/Blog');
+    history.go('/Blog');
 };
 
 const PostDelete = (props) => {
@@ -18,14 +18,14 @@ const PostDelete = (props) => {
     const renderActions = (
         <React.Fragment>
             <button
-                className="ui button negative"
+                className='ui button negative'
                 onClick={() => {
                     props.deletePost(id);
                 }}
             >
                 Delete
             </button>
-            <button className="ui button">Cancel</button>
+            <button className='ui button'>Cancel</button>
         </React.Fragment>
     );
 
@@ -34,11 +34,11 @@ const PostDelete = (props) => {
     }, []);
 
     const renderContent = (props) => {
-        if (!props.state.postsReducer.data) {
-            return "Are you sure you want to delete this post?";
+        if (!props.state.posts.data) {
+            return 'Are you sure you want to delete this post?';
         } else {
-            if (props.state.postsReducer.data.title !== "") {
-                return `Are you sure you want to delete this post with title: ${props.state.postsReducer.data.title}`;
+            if (props.state.posts.data.title !== '') {
+                return `Are you sure you want to delete this post with title: ${props.state.posts.data.title}`;
             }
         }
     };
@@ -47,7 +47,7 @@ const PostDelete = (props) => {
         <div>
             Post delete
             <Modal
-                title="Delete post"
+                title='Delete post'
                 content={renderContent(props)}
                 actions={renderActions}
                 onDismiss={onDismiss}
