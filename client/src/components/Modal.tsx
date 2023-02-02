@@ -1,34 +1,11 @@
-import {
-    MouseEventHandler,
-    ReactChild,
-    ReactFragment,
-    ReactPortal,
-} from 'react';
+import { MouseEventHandler, ReactChild } from 'react';
 import ReactDOM from 'react-dom';
 
 const Modal = (props: {
     onDismiss: MouseEventHandler<HTMLDivElement> | undefined;
-    title:
-        | boolean
-        | ReactChild
-        | ReactFragment
-        | ReactPortal
-        | null
-        | undefined;
-    content:
-        | boolean
-        | ReactChild
-        | ReactFragment
-        | ReactPortal
-        | null
-        | undefined;
-    actions:
-        | boolean
-        | ReactChild
-        | ReactFragment
-        | ReactPortal
-        | null
-        | undefined;
+    title: string;
+    content: string | undefined;
+    actions: ReactChild | null | undefined;
 }) => {
     return ReactDOM.createPortal(
         <div

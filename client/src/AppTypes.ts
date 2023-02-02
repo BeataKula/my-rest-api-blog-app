@@ -156,3 +156,43 @@ export type InputProps = {
 }
 
 export type onSubmitType = (formValues: PostFormAttr) => void;
+
+export type postDeleteProps = {
+    deletePost?: any;
+    fetchPost?: any;
+    state: postDeleteState;
+}
+export type postDeleteState = {
+    posts: {
+        data: PostFormAttr;
+    };
+}
+
+export type GoogleAuthProps = { 
+    SignIn: (arg0: any) => void; 
+    SignOut: () => void; 
+    isSignedIn: Boolean; 
+}
+export type GoogleAuthCurrentUser = {
+    get: () => { 
+        (): any; 
+        new (): any; 
+        getId: { 
+            (): any; 
+            new (): 
+            any 
+        } 
+    };
+}
+
+export type GoogleAuthIsSignedIn = {
+    get: () => Boolean;
+    listen: (onAuthChange: (isSignedIn: Boolean) => void) => void;
+};
+
+export type GoogleAuthInstance = {
+    signIn: () => void;
+    signOut: () => void;
+    currentUser: GoogleAuthCurrentUser;
+    isSignedIn: GoogleAuthIsSignedIn;
+};

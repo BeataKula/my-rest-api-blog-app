@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
-import { bindActionCreators } from 'redux';
+import { AnyAction, Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Modal from '../components/Modal';
 import history from '../history';
 import { deletePost, fetchPost } from '../actions';
+import { postDeleteProps, postDeleteState } from '../AppTypes';
 
 const onDismiss = () => {
     history.push('/Blog');
-    history.go('/Blog');
+    //history.go('/Blog');
 };
 
-const PostDelete = (props) => {
+const PostDelete = (props: postDeleteProps) => {
     const { id } = useParams();
 
     const renderActions = (
@@ -33,7 +34,7 @@ const PostDelete = (props) => {
         props.fetchPost(id);
     }, []);
 
-    const renderContent = (props) => {
+    const renderContent = (props: postDeleteProps) => {
         if (!props.state.posts.data) {
             return 'Are you sure you want to delete this post?';
         } else {
@@ -55,12 +56,12 @@ const PostDelete = (props) => {
         </div>
     );
 };
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: postDeleteState) => {
     return {
         state: state,
     };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
     return bindActionCreators(
         {
             fetchPost,
