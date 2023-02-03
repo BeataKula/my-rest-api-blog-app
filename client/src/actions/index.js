@@ -17,6 +17,7 @@ import _ from 'lodash';
 import { getPosts, getUserById } from '../apis/jsonLocalApi';
 
 const returnToPostPage = () => {
+    //TD - change and show "delete message" another way
     setTimeout(() => {
         history.push('/Blog');
         history.go('/Blog');

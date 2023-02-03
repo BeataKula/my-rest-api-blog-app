@@ -49,7 +49,6 @@ class PostForm extends React.Component<{
         if (id !== undefined) {
             return (
                 <Field
-                    style={{ display: 'none' }}
                     name='id'
                     component={
                         <div className='field'>
