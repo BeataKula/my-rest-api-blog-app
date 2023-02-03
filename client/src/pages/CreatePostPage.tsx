@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
-import PostForm from "../components/PostForm";
-import { createPost } from "../actions";
-import { PostFormAttr, ConnectedProps } from "../AppTypes";
-import Message from "../components/Message";
+import { connect } from 'react-redux';
+import PostForm from '../components/PostForm';
+import { createPost } from '../actions';
+import { PostFormAttr, ConnectedProps } from '../AppTypes';
+import Message from '../components/Message';
 
 const CreatePostPage = (props: ConnectedProps) => {
     const onSubmit = (formValues: PostFormAttr) => {
@@ -14,11 +14,11 @@ const CreatePostPage = (props: ConnectedProps) => {
             return (
                 <Message
                     showMessage={true}
-                    category={"positive"}
-                    headerText=""
+                    category={'positive'}
+                    headerText=''
                     text={`Post with id = ${id} has been created`}
-                    color="olive"
-                    size="large"
+                    color='olive'
+                    size='large'
                 />
             );
         }
@@ -26,7 +26,7 @@ const CreatePostPage = (props: ConnectedProps) => {
 
     return (
         <>
-            {renderMessage(props.createPostResponse.postsReducer.data?.id)}
+            {renderMessage(props.createPostResponse.posts.data?.id)}
             <PostForm onSubmit={onSubmit} />
         </>
     );

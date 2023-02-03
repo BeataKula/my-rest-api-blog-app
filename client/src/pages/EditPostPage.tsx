@@ -1,9 +1,9 @@
-import { connect } from "react-redux";
-import PostForm from "../components/PostForm";
-import { editPost } from "../actions";
-import { EditPostConnectedProps, PostFormAttr } from "../AppTypes";
-import { useParams } from "react-router-dom";
-import _ from "lodash";
+import { connect } from 'react-redux';
+import PostForm from '../components/PostForm';
+import { editPost } from '../actions';
+import { EditPostConnectedProps, PostFormAttr } from '../AppTypes';
+import { useParams } from 'react-router-dom';
+import _ from 'lodash';
 
 const EditPostPageWrapper = (props: EditPostConnectedProps) => {
     return <EditPostPage {...props} />;
@@ -15,7 +15,7 @@ const EditPostPage = (props: EditPostConnectedProps) => {
         props.editPost(formValues, id);
     };
 
-    const listPost: any = props.editPostResponse.postsReducer.allList.data;
+    const listPost: any = props.editPostResponse.posts.allList.data;
 
     if (id !== undefined) {
         const index = Number(id) - 1;

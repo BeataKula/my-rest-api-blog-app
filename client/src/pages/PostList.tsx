@@ -1,17 +1,17 @@
-import { Component } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { fetchPostsAndUsers } from "../actions";
-import Post from "../components/Post";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Button from "../components/Button";
-import { StyledMarginButtonLink } from "../components/LinkComponent";
-import { PostFormAttr, postReducerType, ReducersState } from "../AppTypes";
-import Comment from "../components/Comment";
-import { bindActionCreators, Dispatch } from "redux";
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { fetchPostsAndUsers } from '../actions';
+import Post from '../components/Post';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import Button from '../components/Button';
+import { StyledMarginButtonLink } from '../components/LinkComponent';
+import { PostFormAttr, postReducerType, ReducersState } from '../AppTypes';
+import Comment from '../components/Comment';
+import { bindActionCreators, Dispatch } from 'redux';
 
-const ADD_BLOG_LINK = "/Blog/add";
+const ADD_BLOG_LINK = '/Blog/add';
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -64,7 +64,7 @@ class PostList extends Component<any, {}> {
     }
 
     componentDidUpdate() {
-        const allList = this.props.postsReducer.allList;
+        const allList = this.props.posts.allList;
 
         if (this.canSetPostsInState(allList) && !this.state.isloaded) {
             this.setState({
@@ -78,15 +78,15 @@ class PostList extends Component<any, {}> {
 
     renderMessage() {
         if (this.state.isloaded) {
-            const allList = this.props.postsReducer.allList;
+            const allList = this.props.posts.allList;
             return (
                 <Message
                     showMessage={allList.data.showMessage}
                     category={allList.data.categoryMessage}
                     headerText={allList.data.headerMessageText}
                     text={allList.data.messageText}
-                    color="red"
-                    size="large"
+                    color='red'
+                    size='large'
                 />
             );
         }
@@ -94,19 +94,19 @@ class PostList extends Component<any, {}> {
 
     renderList() {
         const ListOfPosts = this.state.posts.map((post: PostFormAttr) => {
-            const buttonId = "button-" + post["id"];
+            const buttonId = 'button-' + post['id'];
             return (
-                <li key={post["id"]}>
+                <li key={post['id']}>
                     <PostElementStyle>
                         <Post {...post} />
                         <PostElementFooterStyle>
                             <Button
                                 id={buttonId}
-                                about="commentPrimary"
-                                name="Dodaj komentarz"
+                                about='commentPrimary'
+                                name='Dodaj komentarz'
                                 onClick={AddComment}
                             />
-                            <Comment userId={post["userId"]} />
+                            <Comment userId={post['userId']} />
                         </PostElementFooterStyle>
                     </PostElementStyle>
                 </li>
@@ -123,7 +123,7 @@ class PostList extends Component<any, {}> {
         if (this.props.auth.isSignedIn) {
             return (
                 <StyledMarginButtonLink
-                    className="ui button top right floated basic"
+                    className='ui button top right floated basic'
                     to={ADD_BLOG_LINK}
                 >
                     Add post
@@ -135,11 +135,11 @@ class PostList extends Component<any, {}> {
     render() {
         return (
             <>
-                <div className="ui relaxed divided list">
+                <div className='ui relaxed divided list'>
                     {this.renderCreate()}
                 </div>
                 <Loader isActive={!this.state.isloaded} />
-                <div className="ui relaxed divided list">
+                <div className='ui relaxed divided list'>
                     {this.renderMessage()}
                     {this.renderList()}
                 </div>
@@ -150,8 +150,8 @@ class PostList extends Component<any, {}> {
 
 const mapStateToProps = (state: ReducersState) => {
     return {
-        postsReducer: state.postsReducer,
-        usersReducer: state.usersReducer,
+        posts: state.posts,
+        users: state.users,
         auth: state.auth,
         form: state.form,
     };

@@ -2,10 +2,10 @@ import {
     GET_USERS_BY_ID_REQUEST,
     GET_USERS_BY_ID_SUCCESS,
     GET_USERS_BY_ID_FAIL,
-} from "../actions/actionsTypes";
-import { UserAction } from "../AppTypes";
+} from '../../actions/actionsTypes';
+import { UserAction } from '../../AppTypes';
 
-export default (state = [], action: UserAction) => {
+const userReducer = (state = [], action: UserAction) => {
     switch (action.type) {
         case GET_USERS_BY_ID_REQUEST:
             return [
@@ -44,3 +44,4 @@ export default (state = [], action: UserAction) => {
             return state;
     }
 };
+export default userReducer;
